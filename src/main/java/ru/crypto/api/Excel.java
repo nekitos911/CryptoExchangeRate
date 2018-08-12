@@ -1,11 +1,13 @@
 package ru.crypto.api;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import ru.crypto.enums.Crypto;
 import ru.crypto.enums.Currency;
 
@@ -44,6 +46,16 @@ public class Excel {
 
             rowhead.createCell(Crypto.values().length + Currency.values().length).setCellValue("Date");
 
+            HSSFFont font= workbook.createFont();
+            font.setFontHeightInPoints((short)10);
+            font.setFontName("Arial");
+            font.setColor(IndexedColors.BLACK.getIndex());
+            font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            CellStyle style = workbook.createCellStyle();
+            style.setFont(font);
+            for (int i = 0; i < Crypto.values().length + Currency.values().length + 1; i++) {
+                rowhead.getCell(i).setCellStyle(style);
+            }
 
             FileOutputStream fileOut = new FileOutputStream(filename);
             workbook.write(fileOut);
