@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -15,8 +16,10 @@ public class MainApp extends Application {
         String fxmlFile = "/fxml/option.fxml";
         FXMLLoader loader = new FXMLLoader();
         Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("CryptoExchangeRate");
+        stage.getIcons().add(new Image("Icon.jpg"));
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 }
